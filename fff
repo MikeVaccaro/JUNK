@@ -1,0 +1,2 @@
+SELECT A AS new_column_name, B, Bb
+FROM your_table;

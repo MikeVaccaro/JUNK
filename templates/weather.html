@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather Now</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main class="weather-app">
+    <header>
+      <p class="eyebrow">Current conditions</p>
+      <h1>Weather Now</h1>
+    </header>
+
+    <form class="search" method="post">
+      <label for="city">City</label>
+      <div class="search-controls">
+        <input id="city" name="city" value="{{ city }}" placeholder="Search for a city..." required>
+        <button type="submit">Check weather</button>
+      </div>
+    </form>
+
+    {% if error %}
+      <p class="error" role="alert">{{ error }}</p>
+    {% endif %}
+
+    {% if weather %}
+      <section class="weather-card" aria-live="polite">
+        <div class="weather-heading">
+          <div>
+            <p class="location">{{ weather.city }}{% if weather.region %}, {{ weather.region }}{% endif %}</p>
+            <p class="country">{{ weather.country }}</p>
+          </div>
+          <div class="weather-icon" role="img" aria-label="{{ weather.description }}">{{ weather.icon }}</div>
+        </div>
+        <div class="temperature">
+          <strong>{{ weather.temperature }}°</strong>
+          <span>F</span>
+        </div>
+        <p class="description">{{ weather.description }}</p>
+        <div class="details">
+          <div><span>Feels like</span><strong>{{ weather.feels_like }}°</strong></div>
+          <div><span>Humidity</span><strong>{{ weather.humidity }}%</strong></div>
+          <div><span>Wind</span><strong>{{ weather.wind_speed }} mph</strong></div>
+        </div>
+      </section>
+    {% endif %}
+  </main>
+</body>
+</html>

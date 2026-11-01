@@ -1,0 +1,11 @@
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.get("/")
+def home():
+    return "<h1>Hello</h1>"
+
+@app.post("/api/calc")
+def calculate():
+    return jsonify(result=42)
